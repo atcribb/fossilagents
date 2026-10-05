@@ -1,0 +1,15 @@
+Package: fossilagents
+Title: Agent-Based Models of Marine Fossil Ecophysiotypes
+Version: 0.0.0.9000
+Authors@R: person("Alison", "Cribb", email = "alison.cribb@earth.ox.ac.uk", role = c("aut", "cre"))
+Description: Provides a reusable, framework for modelling local marine 
+    fossil ecophysiotype populations through environmental change. Uses
+    PBDB data and modeled environmental reconstructions as inputs.
+    Initial development focuses on evaluating migration and physiological
+    adaptation as explanations for survival across the end-Triassic extinction.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Suggests:
+    targets,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
