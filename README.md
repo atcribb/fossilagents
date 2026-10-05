@@ -5,7 +5,8 @@ ecophysiotype populations through environmental change. Its initial scientific
 focus is the end-Triassic extinction and the roles of habitat tracking and
 physiological adaptation in explaining observed survivors.
 
-The simulation engine is intended to remain dataset-independent. Model agents
+The simulation engine is intended run based on PBDB input, or some
+other dataset of spatially resolved fossil occurrences. Model agents
 are local ecophysiotype populations (an ecophysiotype in a grid cell), and
 initial weights derived from fossil occurrence frequencies are relative weights,
 not estimates of true abundance.
