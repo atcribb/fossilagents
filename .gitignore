@@ -1,3 +1,7 @@
+# Mac files
+.DS_Store
+*./DS_Store
+
 # History files
 .Rhistory
 .Rapp.history
@@ -48,3 +52,38 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Tabular data files
+*.[Cc][Ss][Vv]
+*.[Cc][Ss][Vv].[Gg][Zz]
+
+# Image files
+*.[Aa][Vv][Ii][Ff]
+*.[Bb][Mm][Pp]
+*.[Gg][Ii][Ff]
+*.[Hh][Ee][Ii][Cc]
+*.[Ii][Cc][Oo]
+*.[Jj][Pp][Gg]
+*.[Jj][Pp][Ee][Gg]
+*.[Pp][Nn][Gg]
+*.[Ss][Vv][Gg]
+*.[Tt][Ii][Ff]
+*.[Tt][Ii][Ff][Ff]
+*.[Ww][Ee][Bb][Pp]
+
+# Microsoft Excel files
+*.[Xx][Ll][Ss]
+*.[Xx][Ll][Ss][Bb]
+*.[Xx][Ll][Ss][Mm]
+*.[Xx][Ll][Ss][Xx]
+*.[Xx][Ll][Tt]
+*.[Xx][Ll][Tt][Mm]
+*.[Xx][Ll][Tt][Xx]
+
+# Microsoft Word files
+*.[Dd][Oo][Cc]
+*.[Dd][Oo][Cc][Mm]
+*.[Dd][Oo][Cc][Xx]
+*.[Dd][Oo][Tt]
+*.[Dd][Oo][Tt][Mm]
+*.[Dd][Oo][Tt][Xx]
