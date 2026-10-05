@@ -1,3 +1,6 @@
+# Repository folders only for dev use
+/data_assembly
+
 # Mac files
 .DS_Store
 *./DS_Store
@@ -87,3 +90,4 @@ rsconnect/
 *.[Dd][Oo][Tt]
 *.[Dd][Oo][Tt][Mm]
 *.[Dd][Oo][Tt][Xx]
+
