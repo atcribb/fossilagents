@@ -1,43 +1,13 @@
 #Initialise a population of agents
 
-set.seed(201)
-
-map_it <- function(timebin_fossil_data, age_of_timebin_Ma, p_lng_column_name, p_lat_column_name){
-  
-  #get map shapes 
-  coastlines <- rgplates::reconstruct('coastlines', age=age_of_timebin_Ma, model='PALEOMAP')
-  edge <- mapedge()
-  proj <- 'ESRI:54030'
-  coasts_sf <- st_transform(coastlines, crs=proj)
-  edge_sf <- st_transform(edge, crs=proj)
-  
-  #make fossil data spatial
-  sf_fossils <- st_as_sf(timebin_fossil_data, coords=c(p_lng_column_name, p_lat_column_name), crs=4326) 
-  proj <- 'ESRI:54030'
-  fossils_transformed <- st_transform(sf_fossils, crs=proj)
-  
-  age_map <- ggplot() +
-    geom_sf(data=edge_sf, fill='#E0FBFC') +
-    geom_sf(data=coasts_sf, fill='gray90', col='gray85') +
-    geom_sf(data=fossils_transformed, fill='#adc178', col='black', shape=21, size=2) + #add fill aes here to code for eukaryotes vs prokaryotes, etc.
-    theme_bw() +
-    theme(
-      panel.border=element_rect(fill=NA),
-      legend.key.height = unit(1.5,'line'),
-      legend.title=element_text(size=6),
-      legend.text=element_text(size=7),
-      plot.title=element_text(size=7, face='bold')
-    )
-  return(age_map)
-  
-}
-
+#To-do:
+# add agent ecophysiology traits
 init_population <- function(fossil_data, ecophysiotype_group,
-                            ecophysiotype_group_column, lat_column, lng_column, 
+                            ecophysiotype_group_column, lat_column, lng_column,
+                            start_agent_ids=1,
                             total_ecophysiotype_population,
                             subsample_cell_size,
-                            subsample_cell_threshold,
-                            map_output=TRUE){
+                            subsample_cell_threshold){
   
   
   #=== Defense ===#
@@ -184,13 +154,14 @@ init_population <- function(fossil_data, ecophysiotype_group,
   
   # Create consecutive blocks of agents for each occupied cell. 
   # Agent IDs are unique within this ecophysiotype population, while group_tag records the ecophysiotype shared by every agent returned by this function call.
-  next_agent_row <- 1L
+  next_agent_row <- 1
   for(i in seq_len(nrow(cell_population))){
     n_cell_agents <- cell_population$n_agents[i]
     cell_agent_rows <- seq.int(
       from=next_agent_row,
       length.out=n_cell_agents
     )
+    
     cell_occurrence_rows <- which(
       ecophysiotype_data$cell_ID == cell_population$cell_ID[i]
     )
@@ -205,38 +176,21 @@ init_population <- function(fossil_data, ecophysiotype_group,
     agent_population$lng[cell_agent_rows] <- mean(
       ecophysiotype_data[[lng_column]][cell_occurrence_rows]
     )
-    
+
     next_agent_row <- max(cell_agent_rows) + 1L
   }
   
+  #Get tiering, motility, and feeding assignemnts from ecophysiotype_data
+  agent_population$tiering <- names(sort(table(ecophysiotype_data$Tiering),decreasing=TRUE)[1])
+  agent_population$motility <- names(sort(table(ecophysiotype_data$Motility),decreasing=TRUE)[1])
+  agent_population$feeding <- names(sort(table(ecophysiotype_data$Feeding),decreasing=TRUE)[1])
   
-
-  
-  if(map_output==FALSE){
-     return(agent_population)
+  #Re-assign agent ids based on initial ID number and ecophysiotype group tag
+  for(i in 1:nrow(agent_population)){
+    agent_population$agent_id[i] <- paste(agent_population$group_tag[i], agent_population$agent_id[i],sep='.')
   }
-  if(map_output==TRUE){
-    return(agent_population)
-  }
   
+  return(agent_population)
   
 }
 
-table(ETE_ecospace$FG_Number)
-test <- init_population(fossil_data=ETE_ecospace, 
-                        ecophysiotype_group="115", 
-                        ecophysiotype_group_column="FG_Number", 
-                        lat_column = "p_lat", 
-                        lng_column = "p_lng", 
-                        subsample_cell_size = 275,
-                        subsample_cell_threshold = 15,
-                        total_ecophysiotype_population = 55, 
-                        map_output = TRUE
-                        )
-test
-
-
-checking <- subset(ETE_ecospace, FG_Number=="115")
-View(checking)
-
-map_it(test, 201, "lng", "lat")
