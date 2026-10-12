@@ -128,14 +128,18 @@ init_population <- function(fossil_data, ecophysiotype_group,
   #== initiate columns for output data ==#
   agent_columns <- c('agent_id',
                      'group_tag',
-                     'tiering',
-                     'motility',
-                     'feeding',
-                     'T_u',
-                     'T_o',
-                     'O2_u',
-                     'O2_o',
-                     'energy_min',
+                     'temp_med',
+                     'temp_IQR',
+                     'O2_med',
+                     'O2_IQR',
+                     'Cexp_med',
+                     'Cexp_IQR',
+                     'mobility',
+                     'attachment',
+                     'sed_relationship',
+                     'infaunal_depth',
+                     'resource_location',
+                     'resource_acquisition',
                      'lat',
                      'lng'
                      )
@@ -180,10 +184,26 @@ init_population <- function(fossil_data, ecophysiotype_group,
     next_agent_row <- max(cell_agent_rows) + 1L
   }
   
-  #Get tiering, motility, and feeding assignemnts from ecophysiotype_data
-  agent_population$tiering <- names(sort(table(ecophysiotype_data$Tiering),decreasing=TRUE)[1])
-  agent_population$motility <- names(sort(table(ecophysiotype_data$Motility),decreasing=TRUE)[1])
-  agent_population$feeding <- names(sort(table(ecophysiotype_data$Feeding),decreasing=TRUE)[1])
+  #Get trait data from ecophysiotype data 
+  #agent_population$tiering <- names(sort(table(ecophysiotype_data$Tiering),decreasing=TRUE)[1])
+  #agent_population$motility <- names(sort(table(ecophysiotype_data$Motility),decreasing=TRUE)[1])
+  #agent_population$feeding <- names(sort(table(ecophysiotype_data$Feeding),decreasing=TRUE)[1])
+  agent_population$temp_med <- names(sort(table(ecophysiotype_data$temp_med),decreasing=TRUE)[1])
+  agent_population$temp_IQR <- names(sort(table(ecophysiotype_data$temp_IQR),decreasing=TRUE)[1])
+  agent_population$O2_med <- names(sort(table(ecophysiotype_data$O2_med),decreasing=TRUE)[1])
+  agent_population$O2_IQR <- names(sort(table(ecophysiotype_data$O2_IQR),decreasing=TRUE)[1])
+  agent_population$Cexp_med <- names(sort(table(ecophysiotype_data$Cexp_med),decreasing=TRUE)[1])
+  agent_population$Cexp_IQR <- names(sort(table(ecophysiotype_data$Cexp_IQR),decreasing=TRUE)[1])
+  
+  agent_population$mobility <- names(sort(table(ecophysiotype_data$mobility),decreasing=TRUE)[1])
+  agent_population$attachment <- names(sort(table(ecophysiotype_data$attachment),decreasing=TRUE)[1])
+  agent_population$sed_relationship <- names(sort(table(ecophysiotype_data$sed_relationship),decreasing=TRUE)[1])
+  agent_population$infaunal_depth <- names(sort(table(ecophysiotype_data$infaunal_depth),decreasing=TRUE)[1])
+  agent_population$resource_location <- names(sort(table(ecophysiotype_data$resource_location),decreasing=TRUE)[1])
+  agent_population$resource_acquisition <- names(sort(table(ecophysiotype_data$resource_acquisition),decreasing=TRUE)[1])
+  
+  
+  
   
   #Re-assign agent ids based on initial ID number and ecophysiotype group tag
   for(i in 1:nrow(agent_population)){

@@ -1,5 +1,7 @@
 # Repository folders only for dev use
 /data_assembly
+/data/builder_datasets
+
 
 # Mac files
 .DS_Store
