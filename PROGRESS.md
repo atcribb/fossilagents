@@ -1,5 +1,9 @@
 # Agent Progress
 
+- 2026-10-12 15:27:47 UTC — Updated `R/read_environment.R` to validate that required climate columns are numeric and `environment_nc_path` is a single existing filepath.
+
+- 2026-10-12 15:24:59 UTC — Updated `R/read_environment.R` to stop with an error when `agent_state` is missing any required climate variable, regardless of column order or additional columns.
+
 - 2026-10-05 10:32:16 UTC — Created `PROGRESS.md` with this initial entry after reading `AGENTS.md`.
 - 2026-10-05 14:36:42 UTC — Updated `PROGRESS.md` to record the package, testthat, targets, and README scaffolding changes in this task.
 - 2026-10-05 14:36:42 UTC — Added `DESCRIPTION` with package metadata and optional testthat/targets development dependencies.

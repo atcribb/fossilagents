@@ -99,3 +99,10 @@ map_it <- function(timebin_fossil_data, age_of_timebin_Ma, p_lng_column_name, p_
 }
 map_it(agent_state_0, 201, "lat", "lng")
 
+
+
+
+
+
+
+
