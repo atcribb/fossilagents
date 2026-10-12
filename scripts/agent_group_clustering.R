@@ -310,9 +310,15 @@ for (i in seq_along(clusters)) {
 
 View(cluster_characterization)
 
+colnames(cluster_characterization)
+keepcols <- c('cluster', 'dominant_sediment_relationship',
+              'dominant_infaunal_depth',
+              'dominant_mobility', 'dominant_attachment',
+              'dominant_resource_location', 'dominant_resource_acquisition',
+              'temp_med', 'temp_IQR', 'O2_med', 'O2_IQR', 'Cexp_med', 'Cexp_IQR')
+cluster_dataset <- cluster_characterization[,keepcols]
+cluster_datset
 
 
-#==== finally, create agent group cluster dataset =====#
-
-
-
+save(cluster_dataset, file='data/group_cluster_traits.RData')
+save(genera_traits, file='data/genera_traits_clusters_data.RData')
