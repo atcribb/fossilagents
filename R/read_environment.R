@@ -57,7 +57,7 @@ read_environment <- function(agent_state, lat_column_name, lng_column_name, envi
   if(!requireNamespace("PaleoClimR", quietly=TRUE)){
     stop("The PaleoClimR package is required.")
   } else{
-    library(palaeoverse)
+    library(PaleoClimR)
   }
   
   #match to environment 
