@@ -29,9 +29,10 @@ get_suitability <- function(experienced_climate, climate_median, climate_IQR, va
     O2_K <- climate_median - climate_IQR
     h <- 6
     O2_experienced <- experienced_climate
-    raw_suitability <- O2_experienced / (O2_K^h - O2_experienced^h)
+    suitability <- O2_experienced^h / (O2_K^h + O2_experienced^h)
     O2_optimum_suitability <- climate_median^h / (O2_K^h + climate_median^h)
-    suitability <- raw_suitability / O2_optimum_suitability
+    suitability <- suitability / O2_optimum_suitability
+    suitability <- min(suitability, 1)
     return(list(suitability=suitability))
     
     return(list(suitability=suitability))
@@ -42,9 +43,10 @@ get_suitability <- function(experienced_climate, climate_median, climate_IQR, va
     food_K <- climate_median - climate_IQR
     h <- 1
     food_experienced <- experienced_climate
-    raw_suitability <- food_experienced / (food_K^h - food_experienced^h)
-    food_optimum_suitability <- climate_median^h / (food_K^h + climate_median)
-    suitability <- raw_suitability / food_optimum_suitability 
+    suitability <- food_experienced^h / (food_K^h + food_experienced^h)
+    food_optimum_suitability <- climate_median^h / (food_K^h + climate_median^h)
+    suitability <- suitability / food_optimum_suitability
+    suitability <- min(suitability, 1)
     return(list(suitability=suitability))
   }
  
@@ -101,11 +103,11 @@ read_environment <- function(agent_state, lat_column_name, lng_column_name, envi
   food_suitability <- get_suitability(current_Corg, agent_state[,'Cexp_med'], agent_state[,'Cexp_IQR'], 'food')
   
   # get overall suitability score - harmonic mean which gives more power to poor conditions
-  scores <- c(temp_suitability$suitability, oxygen_suitability$suitability, food_suitability$suitability)
-  overall_suitability <- ifelse(
-    any(scores==0),
-    0,
-    length(scores)/sum(1/scores))
+  scores <- cbind(abs(temp_suitability$suitability),
+                  abs(oxygen_suitability$suitability),
+                  abs(food_suitability$suitability))
+  scores <- pmax(0, pmin(1, scores))
+  overall_suitability <- length(scores) / sum(1/scores)
   
   return(list(current_temperature=current_temperature,
               current_oxygen=current_oxygen,

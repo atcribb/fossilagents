@@ -1,5 +1,7 @@
 # Agent Progress
 
+- 2026-10-28 00:00:00 UTC — Updated `R/read_environment.R` to bound oxygen, food, component, and harmonic-mean overall suitability scores to [0, 1].
+
 - 2026-10-13 14:30:16 BST — Updated `scripts/agent_population_suitabilities.R` to catch per-cluster initialization errors, report them, and continue the loop.
 
 - 2026-10-12 15:27:47 UTC — Updated `R/read_environment.R` to validate that required climate columns are numeric and `environment_nc_path` is a single existing filepath.

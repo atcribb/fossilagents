@@ -104,7 +104,7 @@ map_it <- function(timebin_fossil_data, age_of_timebin_Ma, p_lng_column_name, p_
   age_map <- ggplot() +
     geom_sf(data=edge_sf, fill='#E0FBFC') +
     geom_sf(data=coasts_sf, fill='gray90', col='gray85') +
-    geom_sf(data=fossils_transformed, aes(fill=temp_suitability), col='black', shape=21, size=2) + 
+    geom_sf(data=fossils_transformed, aes(fill=overall_suitability), col='black', shape=21, size=4) + 
     scale_fill_viridis_c() +
     theme_bw() +
     theme(
@@ -117,8 +117,7 @@ map_it <- function(timebin_fossil_data, age_of_timebin_Ma, p_lng_column_name, p_
   return(age_map)
   
 }
-map_it(agent_state_0, 201, "lng", "lat")
-
+map_it(subset(agent_state_0, !is.na(overall_suitability)), 201, "lng", "lat")
 
 
 
