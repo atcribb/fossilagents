@@ -1,5 +1,7 @@
 # Agent Progress
 
+- 2026-10-13 14:30:16 BST — Updated `scripts/agent_population_suitabilities.R` to catch per-cluster initialization errors, report them, and continue the loop.
+
 - 2026-10-12 15:27:47 UTC — Updated `R/read_environment.R` to validate that required climate columns are numeric and `environment_nc_path` is a single existing filepath.
 
 - 2026-10-12 15:24:59 UTC — Updated `R/read_environment.R` to stop with an error when `agent_state` is missing any required climate variable, regardless of column order or additional columns.

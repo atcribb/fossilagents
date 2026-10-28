@@ -29,7 +29,11 @@ get_suitability <- function(experienced_climate, climate_median, climate_IQR, va
     O2_K <- climate_median - climate_IQR
     h <- 6
     O2_experienced <- experienced_climate
-    suitability <- O2_experienced / (O2_K^h - O2_experienced^h)
+    raw_suitability <- O2_experienced / (O2_K^h - O2_experienced^h)
+    O2_optimum_suitability <- climate_median^h / (O2_K^h + climate_median^h)
+    suitability <- raw_suitability / O2_optimum_suitability
+    return(list(suitability=suitability))
+    
     return(list(suitability=suitability))
   }
   
@@ -38,7 +42,9 @@ get_suitability <- function(experienced_climate, climate_median, climate_IQR, va
     food_K <- climate_median - climate_IQR
     h <- 1
     food_experienced <- experienced_climate
-    suitability <- food_experienced / (food_K^h - food_experienced^h)
+    raw_suitability <- food_experienced / (food_K^h - food_experienced^h)
+    food_optimum_suitability <- climate_median^h / (food_K^h + climate_median)
+    suitability <- raw_suitability / food_optimum_suitability 
     return(list(suitability=suitability))
   }
  
