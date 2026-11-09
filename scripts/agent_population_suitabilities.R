@@ -66,6 +66,9 @@ for(i in 1:nrow(group_table)){
   
 }
 
+#assign h3 grid cell ids
+
+
 agent_state_0$temp_suitability <- rep(NA, nrow(agent_state_0))
 agent_state_0$oxygen_suitability <- rep(NA, nrow(agent_state_0))
 agent_state_0$food_suitability <- rep(NA, nrow(agent_state_0))

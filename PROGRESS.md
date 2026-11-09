@@ -1,5 +1,9 @@
 # Agent Progress
 
+- 2026-11-09 00:00:00 UTC — Added a tolerance-based latitude index matching example to `R/get_accessible_cells.R`.
+
+- 2026-11-09 00:00:00 UTC — Updated `R/get_accessible_cells.R` to map latitude to `cgenie_lat` using the matching south and north edges.
+
 - 2026-10-28 00:00:00 UTC — Updated `R/read_environment.R` to bound oxygen, food, component, and harmonic-mean overall suitability scores to [0, 1].
 
 - 2026-10-13 14:30:16 BST — Updated `scripts/agent_population_suitabilities.R` to catch per-cluster initialization errors, report them, and continue the loop.
