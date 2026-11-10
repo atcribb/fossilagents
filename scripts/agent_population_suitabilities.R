@@ -40,7 +40,10 @@ vars <- c('agent_id',
           'resource_location',
           'resource_acquisition',
           'lat',
-          'lng')
+          'lng',
+          'adapted_temp_med',
+          'adapted_O2_med',
+          'adapted_Cexp_med')
 agent_state_0 <- as.data.frame(matrix(nrow=0, ncol=length(vars)))
 colnames(agent_state_0) <- vars
 
@@ -89,7 +92,9 @@ for(i in 1:nrow(agent_state_0)){
   
 }
 
+agent_state_0$persistence_probability <- calc_persistence(agent_state_0$overall_suitability)$p_persist
 
+ 
 map_it <- function(timebin_fossil_data, age_of_timebin_Ma, p_lng_column_name, p_lat_column_name){
   
   #get map shapes 
@@ -107,7 +112,7 @@ map_it <- function(timebin_fossil_data, age_of_timebin_Ma, p_lng_column_name, p_
   age_map <- ggplot() +
     geom_sf(data=edge_sf, fill='#E0FBFC') +
     geom_sf(data=coasts_sf, fill='gray90', col='gray85') +
-    geom_sf(data=fossils_transformed, aes(fill=overall_suitability), col='black', shape=21, size=4) + 
+    geom_sf(data=fossils_transformed, aes(fill=persistence_probability), col='black', shape=21, size=4) + 
     scale_fill_viridis_c() +
     theme_bw() +
     theme(
@@ -121,6 +126,8 @@ map_it <- function(timebin_fossil_data, age_of_timebin_Ma, p_lng_column_name, p_
   
 }
 map_it(subset(agent_state_0, !is.na(overall_suitability)), 201, "lng", "lat")
+
+
 
 
 
