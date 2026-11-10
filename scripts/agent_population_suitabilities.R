@@ -2,6 +2,7 @@
 
 source('R/init_population.R')
 source('R/read_environment.R')
+source('R/calc_persistence.R')
 
 #fossil occurrences - 
 load('data/ETE_genera_cluster_traits.RData')

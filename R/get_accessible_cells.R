@@ -61,19 +61,3 @@ get_accessible_cells <- function(agent_df, cell_id_column, depth_mask_path='data
   
 }
 
-get_accessible_cells(test_agents[1,], 'cell_id')
-
-
-test_lat <- 31.85543
-test_lng <- 15
-cgenie_lat_list <- as.numeric(rownames(ocean_land_coast_mask))
-row_idx <- which(round(test_lat) == round(cgenie_lat_list))
-ocean_land_coast_mask[9,as.character(test_lng)]
-
-# Match rounded coordinates with a small tolerance instead of exact equality.
-mask_latitudes <- c(31.855431, 31.9)
-lat_index <- which.min(abs(mask_latitudes - test_lat))
-if(abs(mask_latitudes[lat_index] - test_lat) <= 1e-4){
-  lat_index
-}
-
