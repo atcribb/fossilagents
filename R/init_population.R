@@ -141,7 +141,10 @@ init_population <- function(fossil_data, ecophysiotype_group,
                      'resource_location',
                      'resource_acquisition',
                      'lat',
-                     'lng'
+                     'lng',
+                     'adapted_temp_med',
+                     'adapted_O2_med',
+                     'adapted_Cexp_med'
                      )
   
   #=== create agent population data frame ===#
@@ -202,7 +205,10 @@ init_population <- function(fossil_data, ecophysiotype_group,
   agent_population$resource_location <- names(sort(table(ecophysiotype_data$resource_location),decreasing=TRUE)[1])
   agent_population$resource_acquisition <- names(sort(table(ecophysiotype_data$resource_acquisition),decreasing=TRUE)[1])
   
-  
+  #initialise 'adapted' temperature, oxygen, and food median values as the original niche
+  agent_population$adapted_temp_med <- agent_population$temp_med
+  agent_population$adapted_O2_med <- agent_population$O2_med
+  agent_population$adapted_Cexp_med <- agent_population$Cexp_med
   
   
   #Re-assign agent ids based on initial ID number and ecophysiotype group tag
