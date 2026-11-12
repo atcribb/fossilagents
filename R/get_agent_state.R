@@ -9,15 +9,6 @@ get_state <- function(agent, world_file){
   
   main_stress <- names(which.min(agent[,c('temp_suitability', 'oxygen_suitability', 'food_suitability')]))
   
-  agent_h3_info <- get_cell_ids(agent, 'lat', 'lng', 2)
-  agent$cell_id <- agent_h3_info$cell_ids
-
-  
-  cell_assessment <- get_accessible_cells(agent, 'cell_id')
-  viable_cells <- cell_assessment$viable_surrounding_cells 
-  all_cells <- cell_assessment$all_surrounding_cells 
-  connectivity <- nrow(viable_cells)/nrow(all_cells)
-  
   if(agent$mobility=='very high'){
     motility_capacity <- 'high'
   } else if(agent$mobility=='high'){
@@ -27,6 +18,12 @@ get_state <- function(agent, world_file){
   } else if(agent$mobility=='stationary'){
     motility_capacity <- 'none'
   }
+  
+  cell_assessment <- get_accessible_cells(agent, agent$mobility, 'cell_id')
+  viable_cells <- cell_assessment$viable_surrounding_cells 
+  all_cells <- cell_assessment$all_surrounding_cells 
+  connectivity <- nrow(viable_cells)/nrow(all_cells)
+  
   
   #adaptive capacities
   max_T_shift <- 1
@@ -60,3 +57,4 @@ get_state <- function(agent, world_file){
               adaptation_capacity_O2=O2_capacity,
               adapatation_capacity_food=food_capacity))
 }
+
