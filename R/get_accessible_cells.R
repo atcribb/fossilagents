@@ -20,17 +20,23 @@ cgenie_grid_match <- function(lat, lng){
 }
 
 
-get_accessible_cells <- function(agent_df, cell_id_column, depth_mask_path='data/masks/ocean_land_coast.RData', h3_resolution=2){
+get_accessible_cells <- function(agent_df, agent_mobility, cell_id_column, depth_mask_path='data/masks/ocean_land_coast.RData', h3_resolution=2){
   
   load(depth_mask_path)
   
   library(sf)
   library(h3jsr)
   
+  if(agent_mobility=='very high'){
+    ring_size <- 3
+  } else{ring_size <- 1}
+  
   #surrounding cell ids
-  disk_ids <- get_disk(h3_address=agent_df[,cell_id_column], ring_size=1)[[1]]
+  disk_ids <- get_disk(h3_address=agent_df[,cell_id_column], ring_size=ring_size)[[1]]
   agent_id <- agent_df[,cell_id_column]
   disk_ids[!disk_ids %in% agent_id] #remove the agent id from the disk return
+  
+
   
   #disk midpoint coordinates
   surrounding_midpoints <- st_coordinates(cell_to_point(disk_ids))
