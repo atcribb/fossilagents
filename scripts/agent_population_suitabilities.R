@@ -1,6 +1,6 @@
 # Calculate suitability scores for all agents and create map 
 library(R.utils)
-sourceDirectory('R/')
+sourceDirectory('R/', modifiedOnly=FALSE)
 
 #fossil occurrences - 
 load('data/ETE_genera_cluster_traits.RData')
