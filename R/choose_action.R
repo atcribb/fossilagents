@@ -34,15 +34,17 @@ choose_action <- function(agent, world_file){
     adpatation_capacity <- agent_state$adaptation_capacity_food
   }
   
-  prob_migration <- (base_migration + stress*stress_weight_migration)*dispersal_ability
-  prob_adaptation <- (base_adaptation + stress*stress_weight_adaptation)*adaptation_capacity
-  
-  action_probs <- data.frame(
-    stay = (1-prob_migration)*(1-prob_adaptation),
-    migrate = prob_migration*(1-prob_adaptation),
-    adapt = (1-prob_migration)*prob_adaptation,
-    migrate_adapt = prob_migration*prob_adaptation
+  action_states <- data.frame(
+    base_migration = base_migration,
+    base_adaptation = base_adaptation,
+    stress = stress,
+    stress_weight_migration = stress_weight_migration,
+    stress_weight_adaptation = stress_weight_adaptation,
+    dispersal_ability = dispersal_ability,
+    adaptation_capacity = adaptation_capacity 
   )
+  
+  action_probs <- get_action_probabilities(action_states)
   
   decision <- sample(x=names(action_probs),
                      size=1,
