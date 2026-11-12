@@ -1,8 +1,6 @@
 # Calculate suitability scores for all agents and create map 
-
-source('R/init_population.R')
-source('R/read_environment.R')
-source('R/calc_persistence.R')
+library(R.utils)
+sourceDirectory('R/')
 
 #fossil occurrences - 
 load('data/ETE_genera_cluster_traits.RData')
@@ -70,7 +68,6 @@ for(i in 1:nrow(group_table)){
   
 }
 
-#assign h3 grid cell ids
 
 
 agent_state_0$temp_suitability <- rep(NA, nrow(agent_state_0))

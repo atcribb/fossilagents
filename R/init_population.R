@@ -1,7 +1,5 @@
 #Initialise a population of agents
 
-#To-do:
-# add agent ecophysiology traits
 init_population <- function(fossil_data, ecophysiotype_group,
                             ecophysiotype_group_column, lat_column, lng_column,
                             start_agent_ids=1,
@@ -216,7 +214,17 @@ init_population <- function(fossil_data, ecophysiotype_group,
     agent_population$agent_id[i] <- paste(agent_population$group_tag[i], agent_population$agent_id[i],sep='.')
   }
   
+  
+  #give cell ids
+  h3_info <- get_cell_ids(agent_population, 'lat', 'lng', resolution=2)
+  agent_population$cell_id <- h3_info$cell_ids
+  agent_population$midpoint_lng <- h3_info$h3_midpoints[,'lng'] 
+  agent_population$midpoint_lat <- h3_info$h3_midpoints[,'lat']
+  
   return(agent_population)
   
 }
+
+
+
 
