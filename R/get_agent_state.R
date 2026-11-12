@@ -1,6 +1,6 @@
 #Function to get agent state: suitability scores, main stress, connectivity, mobility capacity, and adaptation capacity
 
-get_state <- function(agent, world_file){
+get_agent_state <- function(agent, world_file){
   
   overall_suitability <- agent[,'overall_suitability']
   temperature_suitability <- agent[,'temp_suitability']
