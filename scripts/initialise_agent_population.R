@@ -88,7 +88,7 @@ for(i in 1:nrow(agent_state_0)){
 
 agent_state_0$persistence_probability <- calc_persistence(agent_state_0$overall_suitability)$p_persist
 
-
+agent_map(agent_state_0, 201, 'lng', 'lat')
 
 #save in list
 agent_population_history <- list()
