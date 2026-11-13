@@ -55,6 +55,6 @@ get_agent_state <- function(agent, world_file){
               motility_capacity=motility_capacity,
               adaptation_capacity_T=T_capacity,
               adaptation_capacity_O2=O2_capacity,
-              adapatation_capacity_food=food_capacity))
+              adaptation_capacity_food=food_capacity))
 }
 
