@@ -14,9 +14,9 @@ choose_action <- function(agent, world_file){
   stress_weight_adaptation <- 0.5
   
   #dispersal ability
-  if(agent_state$motility_capacity == 'very high'){
+  if(agent_state$motility_capacity == 'high'){
     dispersal_ability <- 1
-  } else if(agent_state$motility_capacity == 'high'){
+  } else if(agent_state$motility_capacity == 'moderate'){
     dispersal_ability <- 0.75
   } else if(agent_state$motility_capacity == 'minimal'){
     dispersal_ability <- 0.25
@@ -31,7 +31,7 @@ choose_action <- function(agent, world_file){
   } else if(main_stress == 'oxygen_suitability'){
     adaptation_capacity <- agent_state$adaptation_capacity_O2
   } else if(main_stress == 'food_suitability'){
-    adpatation_capacity <- agent_state$adaptation_capacity_food
+    adaptation_capacity <- agent_state$adaptation_capacity_food
   }
   
   action_states <- data.frame(
