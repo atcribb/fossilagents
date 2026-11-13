@@ -1,5 +1,7 @@
 # Agent Progress
 
+- 2026-11-13 00:00:00 UTC — Implemented `record_agent_population()` in `R/record_agent_population.R` to append each population data frame under a timestep-based list name.
+
 - 2026-11-09 00:00:00 UTC — Added a tolerance-based latitude index matching example to `R/get_accessible_cells.R`.
 
 - 2026-11-09 00:00:00 UTC — Updated `R/get_accessible_cells.R` to map latitude to `cgenie_lat` using the matching south and north edges.
