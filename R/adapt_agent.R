@@ -13,7 +13,7 @@ adapt_agent <- function(agent, max_adaptation_rate=0.05, world_file){
   adaptation_capacity_food <- agent_state$adaptation_capacity_food
   
   #experienced climates
-  agent_climates <- read_environment(test_agent, 'lat', 'lng', world_file)
+  agent_climates <- read_environment(agent, 'lat', 'lng', world_file)
   experience_T <- agent_climates$current_temperature
   experience_O2 <- agent_climates$current_oxygen
   experience_food <- agent_climates$current_Corg
